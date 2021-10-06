@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Photo Album</title>
+  <link
+    rel="stylesheet"
+    type="text/css"
+    media="screen"
+    href="styles.css"
+  />
+</head>
+<body>
+  <nav>
+    <ul>
+         <li onclick="changeAlbum(0)" id="album1"><a href="#">Hedgehog</a></li>
+         <li onclick="changeAlbum(1)" id="album2"><a href="#">Cat</a></li>
+         <li onclick="changeAlbum(2)" id="album3"><a href="#">Dog</a></li>
+         <li id="emptyAlbum"><a href="#">Empty</a></li>
+         <li style="float:right"><a class="active" href="#">About</a></li>
+    </ul>
+      <div id="highlight">
+        <div id="albumName"> </div>
+      </div>
+  </nav>
+<main>
+    <div class="thumbnail bigPic centerImg">
+         <img src="" class="portrait" alt="pic1" id="display">
+    </div>
+
+    <div>
+         <p id="highlightSpace"> </p>
+    </div>
+
+    <div class="image_container row">
+        <div class="gallery thumbnail" id="div1">
+          <img src="" class="portrait" alt="pic1" id="pic1" onclick="changePic(this, div1)">
+        </div>
+        
+        <div class="gallery thumbnail" id="div2">
+            <img src="" class="portrait" alt="pic2" id="pic2" onclick="changePic(this, div2)">
+        </div>
+        
+        <div class="gallery thumbnail" id="div3">
+            <img src="" class="portrait" alt="pic3" id="pic3" onclick="changePic(this, div3)">
+        </div>
+        
+        <div class="gallery thumbnail" id="div4">
+            <img src="" class="portrait" alt="pic4" id="pic4" onclick="changePic(this, div4)">
+        </div>
+
+        <div class="gallery thumbnail" id="div5">
+            <img src="" class="portrait" alt="pic5" id="pic5" onclick="changePic(this, div5)">
+        </div>
+
+        <div class="gallery thumbnail" id="div6">
+            <img src="" class="portrait" alt="pic6" id="pic6" onclick="changePic(this, div6)">
+        </div>
+        
+    </div>
+
+    <!-- <div id="highlight">
+      <div id="albumName"> </div>
+    </div> -->
+    
+</main>
+
+
+
+
+  <script src="main.js"></script>
+</body>
+</html>
