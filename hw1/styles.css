@@ -93,3 +93,15 @@ li a:hover:not(.active) {
     background-color: #caada8;
     color: #F8E5EE;
 }
+
+#highlightSpace {
+    background-color: #bd9993;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
