@@ -38,14 +38,7 @@ changeAlbum(1);
 
 function changeAlbum(alIndex){
     var album = document.getElementById("albumName");
-    var pic1 = document.getElementById("pic1");
-    var pic2 = document.getElementById("pic2");
-    var pic3 = document.getElementById("pic3");
-    var pic4 = document.getElementById("pic4");
-    var pic5 = document.getElementById("pic5");
-    var pic6 = document.getElementById("pic6");
     var bigpic = document.getElementById("display");
-    var div1 = document.getElementById("div1");
     albumIdx = alIndex;
 
     // change album title
@@ -57,46 +50,119 @@ function changeAlbum(alIndex){
 
     // change album photo
     if(albumIdx == 0){
+        var gallery_container = document.getElementById("gallery_container");
+        while (gallery_container.firstChild) {
+            gallery_container.removeChild(gallery_container.lastChild);
+        }
+        for(var i = 0; i < hedgehogImg.length; i ++){
+            var new_div = document.createElement("div");
+            var new_img = document.createElement("img");
+            new_div.classList.add("gallery");
+            new_div.classList.add("thumbnail");
+            new_img.classList.add("portrait");
+            new_img.alt = "img_" + (i+1);
+            new_img.src = hedgehogImg[i];
+            new_img.onclick = function(){
+                bigpic = document.getElementById("display");
+                bigpic.src = this.src;
+            
+                var elems = document.querySelectorAll(".selected");
+                [].forEach.call(elems, function(el) {
+                    el.classList.remove("selected");
+                });
+            
+                this.parentNode.classList.add("selected");
+                currentImgIdx = Array.prototype.indexOf.call(this.parentNode.parentNode.children, this.parentNode);
+            };
+        
+            new_div.appendChild(new_img);
+            gallery_container.appendChild(new_div);
+        }
+
+
         var albumBottom = document.getElementById("album1");
         albumBottom.classList.add("activeAlbum");
         bigpic.src = hedgehogImg[0];
-        pic1.src = hedgehogImg[0];
-        pic2.src = hedgehogImg[1];
-        pic3.src = hedgehogImg[2];
-        pic4.src = hedgehogImg[3];
-        pic5.src = hedgehogImg[4];
-        pic6.src = hedgehogImg[5];
     }
     else if(albumIdx == 1){
+        var gallery_container = document.getElementById("gallery_container");
+        while (gallery_container.firstChild) {
+            gallery_container.removeChild(gallery_container.lastChild);
+        }
+        for(var i = 0; i < catImg.length; i ++){
+            var new_div = document.createElement("div");
+            var new_img = document.createElement("img");
+            new_div.classList.add("gallery");
+            new_div.classList.add("thumbnail");
+            new_img.classList.add("portrait");
+            new_img.alt = "img_" + (i+1);
+            new_img.src = catImg[i];
+            new_img.onclick = function(){
+                bigpic = document.getElementById("display");
+                bigpic.src = this.src;
+            
+                var elems = document.querySelectorAll(".selected");
+                [].forEach.call(elems, function(el) {
+                    el.classList.remove("selected");
+                });
+            
+                this.parentNode.classList.add("selected");
+                currentImgIdx = Array.prototype.indexOf.call(this.parentNode.parentNode.children, this.parentNode);
+            };
+        
+            new_div.appendChild(new_img);
+            gallery_container.appendChild(new_div);
+        }
+
+
         var albumBottom = document.getElementById("album2");
         albumBottom.classList.add("activeAlbum");
         bigpic.src = catImg[0];
-        pic1.src = catImg[0];
-        pic2.src = catImg[1];
-        pic3.src = catImg[2];
-        pic4.src = catImg[3];
-        pic5.src = catImg[4];
-        pic6.src = catImg[5];
     }
     else if(albumIdx == 2){
+        var gallery_container = document.getElementById("gallery_container");
+        while (gallery_container.firstChild) {
+            gallery_container.removeChild(gallery_container.lastChild);
+        }
+        for(var i = 0; i < dogImg.length; i ++){
+            var new_div = document.createElement("div");
+            var new_img = document.createElement("img");
+            new_div.classList.add("gallery");
+            new_div.classList.add("thumbnail");
+            new_img.classList.add("portrait");
+            new_img.alt = "img_" + (i+1);
+            new_img.src = dogImg[i];
+            new_img.onclick = function(){
+                bigpic = document.getElementById("display");
+                bigpic.src = this.src;
+            
+                var elems = document.querySelectorAll(".selected");
+                [].forEach.call(elems, function(el) {
+                    el.classList.remove("selected");
+                });
+            
+                this.parentNode.classList.add("selected");
+                currentImgIdx = Array.prototype.indexOf.call(this.parentNode.parentNode.children, this.parentNode);
+            };
+        
+            new_div.appendChild(new_img);
+            gallery_container.appendChild(new_div);
+        }
+
+
         var albumBottom = document.getElementById("album3");
         albumBottom.classList.add("activeAlbum");
         bigpic.src = dogImg[0];
-        pic1.src = dogImg[0];
-        pic2.src = dogImg[1];
-        pic3.src = dogImg[2];
-        pic4.src = dogImg[3];
-        pic5.src = dogImg[4];
-        pic6.src = dogImg[5];
     }
     var elems = document.querySelectorAll(".selected");
     [].forEach.call(elems, function(el) {
         el.classList.remove("selected");
     });
-    div1.classList.add("selected");
+    gallery_container.firstChild.classList.add("selected");
+    currentImgIdx = 0;
 }
 
-function changePic(img, div){
+function changePic(img){
     bigpic = document.getElementById("display");
     bigpic.src = img.src;
 
@@ -105,7 +171,7 @@ function changePic(img, div){
         el.classList.remove("selected");
     });
 
-    div.classList.add("selected");
+    img.parentNode.classList.add("selected");
 }
 
 // listen to click empty album
@@ -113,3 +179,30 @@ var targetElement = document.getElementById("emptyAlbum");
 targetElement.addEventListener("click", function(){
     alert("此為空相簿！");
 })
+
+function pushURL(){
+    var input = document.getElementById("inputURL");
+    if(albumIdx == 0){
+        hedgehogImg.push(input.value);
+    }
+    else if(albumIdx == 1){
+        catImg.push(input.value);
+    }
+    else if(albumIdx == 2){
+        dogImg.push(input.value);
+    }
+    changeAlbum(albumIdx);
+}
+
+function deleteURL(){
+    if(albumIdx == 0){
+        hedgehogImg.splice(currentImgIdx, 1);
+    }
+    else if(albumIdx == 1){
+        catImg.splice(currentImgIdx, 1);
+    }
+    else if(albumIdx == 2){
+        dogImg.splice(currentImgIdx, 1);
+    }
+    changeAlbum(albumIdx);
+}

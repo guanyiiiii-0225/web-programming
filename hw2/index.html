@@ -30,40 +30,20 @@
          <img src="" class="portrait" alt="pic1" id="display">
     </div>
 
-    <div>
-         <p id="highlightSpace"> </p>
+    <div id="highlightSpace"> 
+      <p id="info_title"># Information</p>
+      <p id="info_content">Sum of all picture: 15 / Sum of all picture: 15 / Sum of all picture: 15</p>
+      <p id="delete_text">Do U want to delete this picture?</p>   
+      <button type="button" onclick="alert('我們將刪除此照片'); deleteURL()" id="delete_buttom">DELETE!</button>
     </div>
 
-    <div class="image_container row">
-        <div class="gallery thumbnail" id="div1">
-          <img src="" class="portrait" alt="pic1" id="pic1" onclick="changePic(this, div1)">
-        </div>
-        
-        <div class="gallery thumbnail" id="div2">
-            <img src="" class="portrait" alt="pic2" id="pic2" onclick="changePic(this, div2)">
-        </div>
-        
-        <div class="gallery thumbnail" id="div3">
-            <img src="" class="portrait" alt="pic3" id="pic3" onclick="changePic(this, div3)">
-        </div>
-        
-        <div class="gallery thumbnail" id="div4">
-            <img src="" class="portrait" alt="pic4" id="pic4" onclick="changePic(this, div4)">
-        </div>
+    <div class="image_container row" id="gallery_container"> </div>
 
-        <div class="gallery thumbnail" id="div5">
-            <img src="" class="portrait" alt="pic5" id="pic5" onclick="changePic(this, div5)">
-        </div>
-
-        <div class="gallery thumbnail" id="div6">
-            <img src="" class="portrait" alt="pic6" id="pic6" onclick="changePic(this, div6)">
-        </div>
-        
+    <div id="inputSpace">
+      <p>Enter URL to add picture!</p>
+      <input type="text" placeholder="URL" class="input" id="inputURL">
+      <input type="submit" value="Enter" class="input" onclick="pushURL()">
     </div>
-
-    <!-- <div id="highlight">
-      <div id="albumName"> </div>
-    </div> -->
     
 </main>
 
