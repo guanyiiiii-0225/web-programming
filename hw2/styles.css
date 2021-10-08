@@ -7,7 +7,7 @@ body {
 
 .gallery {
     margin: 5px 5px 15px 5px;
-    border: 2px solid rgb(241, 241, 241);
+    border: 2px solid #f1f1f1;
     float: left;
     border-radius: 3.5%;
 }
@@ -35,9 +35,14 @@ body {
       -ms-transform: translate(-50%,-50%);
           transform: translate(-50%,-50%);
 }
-.thumbnail img.portrait {
+.thumbnail img.vertical {
   width: 100%;
   height: auto;
+}
+
+.thumbnail img.horizontal {
+    width: auto;
+    height: 100%;
 }
 
 
@@ -102,6 +107,10 @@ li a:hover:not(.active) {
 #info_content{
     font-size: 10px;
     padding: 0px;
+    letter-spacing: 0px;
+}
+#info_content:hover{
+    color: #8C6057;
 }
 
 #delete_text{

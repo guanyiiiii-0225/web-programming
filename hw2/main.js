@@ -61,7 +61,8 @@ function changeAlbum(alIndex){
 
         var albumBottom = document.getElementById("album1");
         albumBottom.classList.add("activeAlbum");
-        bigpic.src = hedgehogImg[0];
+        setBigPic(bigpic, hedgehogImg[0]);
+        
 
         // check scroll
         // checkScroll(hedgehogImg);
@@ -76,7 +77,7 @@ function changeAlbum(alIndex){
 
         var albumBottom = document.getElementById("album2");
         albumBottom.classList.add("activeAlbum");
-        bigpic.src = catImg[0];
+        setBigPic(bigpic, catImg[0]);
 
         // check scroll
         // checkScroll(catImg);
@@ -91,7 +92,7 @@ function changeAlbum(alIndex){
 
         var albumBottom = document.getElementById("album3");
         albumBottom.classList.add("activeAlbum");
-        bigpic.src = dogImg[0];
+        setBigPic(bigpic, dogImg[0]);
 
         // check scroll
         // checkScroll(dogImg);
@@ -101,18 +102,6 @@ function changeAlbum(alIndex){
         el.classList.remove("selected");
     });
     gallery_container.firstChild.classList.add("selected");
-}
-
-function changePic(img){
-    bigpic = document.getElementById("display");
-    bigpic.src = img.src;
-
-    var elems = document.querySelectorAll(".selected");
-    [].forEach.call(elems, function(el) {
-        el.classList.remove("selected");
-    });
-
-    img.parentNode.classList.add("selected");
 }
 
 // listen to click empty album
@@ -152,7 +141,6 @@ function updateInfo(albumArray){
     // update information
     var info = document.getElementById("info_content");
     ImgSum = hedgehogImg.length + catImg.length + dogImg.length;
-    console.log(albumArray.length);
     info.innerHTML = "The number of this picture: " + (currentImgIdx+1) + " / Sum of pictures in this album: " + albumArray.length +" / Sum of all pictures: " + ImgSum ;
 }
 
@@ -163,12 +151,21 @@ function createPic(albumArray){
         var new_img = document.createElement("img");
         new_div.classList.add("gallery");
         new_div.classList.add("thumbnail");
-        new_img.classList.add("portrait");
         new_img.alt = "img_" + (i+1);
         new_img.src = albumArray[i];
+        var height = new_img.height;
+        var width = new_img.width;
+        if(height >= width){
+            new_img.classList.add("vertical");
+        }
+        else{
+            new_img.classList.add("horizontal");
+        }
+        
         new_img.onclick = function(){
             bigpic = document.getElementById("display");
-            bigpic.src = this.src;
+            setBigPic(bigpic, this.src);
+            
         
             var elems = document.querySelectorAll(".selected");
             [].forEach.call(elems, function(el) {
@@ -197,6 +194,16 @@ function checkScroll(albumArray){
     else if(picCnt <= 6 && gallery_container.parentNode.id == "scroll"){
         gallery_container.parentNode.id = "";
     }
-    console.log(gallery_container.parentNode.id);
 }
     
+function setBigPic(big, srcString){
+    big.src = srcString;
+    var height = big.height;
+    var width = big.width;
+    if(height >= width){
+        big.className = "vertical";
+    }
+    else{
+        big.className = "horizontal";
+    }
+}
