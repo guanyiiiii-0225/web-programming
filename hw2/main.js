@@ -112,19 +112,23 @@ targetElement.addEventListener("click", function(){
 
 function pushURL(){
     var input = document.getElementById("inputURL");
-    if(albumIdx == 0){
-        hedgehogImg.push(input.value);
+    if(input.value == ""){
+        alert("請輸入網址");
     }
-    else if(albumIdx == 1){
-        catImg.push(input.value);
+    else{
+        if(albumIdx == 0){
+            hedgehogImg.push(input.value);
+        }
+        else if(albumIdx == 1){
+            catImg.push(input.value);
+        }
+        else if(albumIdx == 2){
+            dogImg.push(input.value);
+        }
+    
+        input.value = "";
+        changeAlbum(albumIdx);
     }
-    else if(albumIdx == 2){
-        dogImg.push(input.value);
-    }
-
-    input.value = "";
-
-    changeAlbum(albumIdx);
 }
 
 function deleteURL(){
