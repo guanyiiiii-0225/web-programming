@@ -124,7 +124,8 @@ li a:hover:not(.active) {
     border:2px #bb5440 solid;
     cursor:pointer;
     -webkit-border-radius: 5px;
-    border-radius: 5px; 
+    border-radius: 5px;
+    font-family: "Lucida Console", "Courier New", monospace;
 }
 
 #delete_buttom:hover{
@@ -175,7 +176,8 @@ li a:hover:not(.active) {
     border:2px rgb(150, 150, 150) solid;
     cursor:pointer;
     -webkit-border-radius: 5px;
-    border-radius: 5px; 
+    border-radius: 5px;
+    font-family: "Lucida Console", "Courier New", monospace;
 }
 
 #inputButtom:hover{
