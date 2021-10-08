@@ -121,6 +121,9 @@ function pushURL(){
     else if(albumIdx == 2){
         dogImg.push(input.value);
     }
+
+    input.value = "";
+
     changeAlbum(albumIdx);
 }
 
@@ -155,13 +158,18 @@ function createPic(albumArray){
         new_img.src = albumArray[i];
         var height = new_img.height;
         var width = new_img.width;
-        if(height >= width){
-            new_img.classList.add("vertical");
+        if(height != 0 && width != 0){
+            if(height >= width){
+                new_img.className = "vertical";
+            }
+            else{
+                new_img.className = "horizontal";
+            }
         }
         else{
-            new_img.classList.add("horizontal");
+            new_img.className = "vertical";
         }
-        
+
         new_img.onclick = function(){
             bigpic = document.getElementById("display");
             setBigPic(bigpic, this.src);
@@ -181,6 +189,31 @@ function createPic(albumArray){
         new_div.appendChild(new_img);
         gallery_container.appendChild(new_div);
     }
+
+    setTimeout(function(){
+        if (gallery_container.hasChildNodes()) {
+            var childrenDiv = gallery_container.childNodes;
+          
+            for (var i = 0; i < childrenDiv.length; i++) {
+                var new_div = childrenDiv[i];
+                var new_img = new_div.firstChild;
+                var height = new_img.height;
+                var width = new_img.width;
+                if(height >= width){
+                    new_img.className = "vertical";
+                    console.log(i, height, width, "vertical");
+                    console.log(new_img.classList);
+                }
+                else{
+                    new_img.className = "horizontal";
+                    console.log(i, height, width, "horizontal");
+                }
+            }
+        }
+    }, 200);
+    
+
+
     // update information
     updateInfo(albumArray);
 }
