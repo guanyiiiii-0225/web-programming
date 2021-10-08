@@ -201,12 +201,9 @@ function createPic(albumArray){
                 var width = new_img.width;
                 if(height >= width){
                     new_img.className = "vertical";
-                    console.log(i, height, width, "vertical");
-                    console.log(new_img.classList);
                 }
                 else{
                     new_img.className = "horizontal";
-                    console.log(i, height, width, "horizontal");
                 }
             }
         }
