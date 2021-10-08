@@ -32,17 +32,20 @@
 
     <div id="highlightSpace"> 
       <p id="info_title"># Information</p>
-      <p id="info_content">Sum of all picture: 15 / Sum of all picture: 15 / Sum of all picture: 15</p>
+      <p id="info_content">Sum of all picture:  / Sum of all picture:  / Sum of all picture: </p>
       <p id="delete_text">Do U want to delete this picture?</p>   
       <button type="button" onclick="alert('我們將刪除此照片'); deleteURL()" id="delete_buttom">DELETE!</button>
     </div>
 
-    <div class="image_container row" id="gallery_container"> </div>
+    <div id="scroll">
+      <div class="image_container row" id="gallery_container"> </div>
+    </div>
+    
 
     <div id="inputSpace">
       <p>Enter URL to add picture!</p>
       <input type="text" placeholder="URL" class="input" id="inputURL">
-      <input type="submit" value="Enter" class="input" onclick="pushURL()">
+      <input type="submit" value="Enter" class="input" id="inputButtom" onclick="pushURL()">
     </div>
     
 </main>

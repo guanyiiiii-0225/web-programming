@@ -1,7 +1,7 @@
 const albumTitle = [
-    "This is Hedgehog.",
-    "This is Cat.",
-    "This is Dog."
+    "Welcome to Hedgehog photo album.",
+    "Welcome to Cat photo album.",
+    "Welcome to Dog photo album."
 ]
 
 const hedgehogImg = [
@@ -33,6 +33,7 @@ const dogImg = [
 
 let currentImgIdx = 0;
 let albumIdx = 0;
+let ImgSum = 0;
 changeAlbum(1);
 
 
@@ -40,6 +41,7 @@ function changeAlbum(alIndex){
     var album = document.getElementById("albumName");
     var bigpic = document.getElementById("display");
     albumIdx = alIndex;
+    currentImgIdx = 0;
 
     // change album title
     album.innerHTML = albumTitle[albumIdx];
@@ -54,112 +56,51 @@ function changeAlbum(alIndex){
         while (gallery_container.firstChild) {
             gallery_container.removeChild(gallery_container.lastChild);
         }
-        for(var i = 0; i < hedgehogImg.length; i ++){
-            var new_div = document.createElement("div");
-            var new_img = document.createElement("img");
-            new_div.classList.add("gallery");
-            new_div.classList.add("thumbnail");
-            new_img.classList.add("portrait");
-            new_img.alt = "img_" + (i+1);
-            new_img.src = hedgehogImg[i];
-            new_img.onclick = function(){
-                bigpic = document.getElementById("display");
-                bigpic.src = this.src;
-            
-                var elems = document.querySelectorAll(".selected");
-                [].forEach.call(elems, function(el) {
-                    el.classList.remove("selected");
-                });
-            
-                this.parentNode.classList.add("selected");
-                currentImgIdx = Array.prototype.indexOf.call(this.parentNode.parentNode.children, this.parentNode);
-            };
-        
-            new_div.appendChild(new_img);
-            gallery_container.appendChild(new_div);
-        }
+        createPic(hedgehogImg);
 
 
         var albumBottom = document.getElementById("album1");
         albumBottom.classList.add("activeAlbum");
         bigpic.src = hedgehogImg[0];
+
+        // check scroll
+        // checkScroll(hedgehogImg);
     }
     else if(albumIdx == 1){
         var gallery_container = document.getElementById("gallery_container");
         while (gallery_container.firstChild) {
             gallery_container.removeChild(gallery_container.lastChild);
         }
-        for(var i = 0; i < catImg.length; i ++){
-            var new_div = document.createElement("div");
-            var new_img = document.createElement("img");
-            new_div.classList.add("gallery");
-            new_div.classList.add("thumbnail");
-            new_img.classList.add("portrait");
-            new_img.alt = "img_" + (i+1);
-            new_img.src = catImg[i];
-            new_img.onclick = function(){
-                bigpic = document.getElementById("display");
-                bigpic.src = this.src;
-            
-                var elems = document.querySelectorAll(".selected");
-                [].forEach.call(elems, function(el) {
-                    el.classList.remove("selected");
-                });
-            
-                this.parentNode.classList.add("selected");
-                currentImgIdx = Array.prototype.indexOf.call(this.parentNode.parentNode.children, this.parentNode);
-            };
-        
-            new_div.appendChild(new_img);
-            gallery_container.appendChild(new_div);
-        }
+        createPic(catImg);
 
 
         var albumBottom = document.getElementById("album2");
         albumBottom.classList.add("activeAlbum");
         bigpic.src = catImg[0];
+
+        // check scroll
+        // checkScroll(catImg);
     }
     else if(albumIdx == 2){
         var gallery_container = document.getElementById("gallery_container");
         while (gallery_container.firstChild) {
             gallery_container.removeChild(gallery_container.lastChild);
         }
-        for(var i = 0; i < dogImg.length; i ++){
-            var new_div = document.createElement("div");
-            var new_img = document.createElement("img");
-            new_div.classList.add("gallery");
-            new_div.classList.add("thumbnail");
-            new_img.classList.add("portrait");
-            new_img.alt = "img_" + (i+1);
-            new_img.src = dogImg[i];
-            new_img.onclick = function(){
-                bigpic = document.getElementById("display");
-                bigpic.src = this.src;
-            
-                var elems = document.querySelectorAll(".selected");
-                [].forEach.call(elems, function(el) {
-                    el.classList.remove("selected");
-                });
-            
-                this.parentNode.classList.add("selected");
-                currentImgIdx = Array.prototype.indexOf.call(this.parentNode.parentNode.children, this.parentNode);
-            };
-        
-            new_div.appendChild(new_img);
-            gallery_container.appendChild(new_div);
-        }
+        createPic(dogImg);
 
 
         var albumBottom = document.getElementById("album3");
         albumBottom.classList.add("activeAlbum");
         bigpic.src = dogImg[0];
+
+        // check scroll
+        // checkScroll(dogImg);
     }
     var elems = document.querySelectorAll(".selected");
     [].forEach.call(elems, function(el) {
         el.classList.remove("selected");
     });
     gallery_container.firstChild.classList.add("selected");
-    currentImgIdx = 0;
 }
 
 function changePic(img){
@@ -206,3 +147,56 @@ function deleteURL(){
     }
     changeAlbum(albumIdx);
 }
+
+function updateInfo(albumArray){
+    // update information
+    var info = document.getElementById("info_content");
+    ImgSum = hedgehogImg.length + catImg.length + dogImg.length;
+    console.log(albumArray.length);
+    info.innerHTML = "The number of this picture: " + (currentImgIdx+1) + " / Sum of pictures in this album: " + albumArray.length +" / Sum of all pictures: " + ImgSum ;
+}
+
+function createPic(albumArray){
+    var gallery_container = document.getElementById("gallery_container");
+    for(var i = 0; i < albumArray.length; i ++){
+        var new_div = document.createElement("div");
+        var new_img = document.createElement("img");
+        new_div.classList.add("gallery");
+        new_div.classList.add("thumbnail");
+        new_img.classList.add("portrait");
+        new_img.alt = "img_" + (i+1);
+        new_img.src = albumArray[i];
+        new_img.onclick = function(){
+            bigpic = document.getElementById("display");
+            bigpic.src = this.src;
+        
+            var elems = document.querySelectorAll(".selected");
+            [].forEach.call(elems, function(el) {
+                el.classList.remove("selected");
+            });
+        
+            this.parentNode.classList.add("selected");
+            currentImgIdx = Array.prototype.indexOf.call(this.parentNode.parentNode.children, this.parentNode);
+    
+            // update information
+            updateInfo(albumArray);
+        };
+        new_div.appendChild(new_img);
+        gallery_container.appendChild(new_div);
+    }
+    // update information
+    updateInfo(albumArray);
+}
+
+function checkScroll(albumArray){
+    var gallery_container = document.getElementById("gallery_container");
+    var picCnt = albumArray.length;
+    if(picCnt > 6 && gallery_container.parentNode.id != "scroll"){
+        gallery_container.parentNode.id = "scroll";
+    }
+    else if(picCnt <= 6 && gallery_container.parentNode.id == "scroll"){
+        gallery_container.parentNode.id = "";
+    }
+    console.log(gallery_container.parentNode.id);
+}
+    

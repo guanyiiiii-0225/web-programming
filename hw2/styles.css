@@ -151,7 +151,7 @@ li a:hover:not(.active) {
     padding: 20px;
     border-radius: 15px;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 .row:after {
@@ -167,6 +167,12 @@ li a:hover:not(.active) {
     cursor:pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px; 
+}
+
+#inputButtom:hover{
+    border:2px rgb(110, 109, 109) solid;
+    background:rgb(150, 150, 150);
+    color: rgb(231, 231, 231);
 }
 
 #inputSpace{
@@ -185,4 +191,19 @@ li a:hover:not(.active) {
 #inputSpace:hover{
     background-color: #caada8;
     color: #F8E5EE;
+}
+
+#scroll {
+    background: #EADDE1;
+    height: 300px;
+    width: 100%;
+    /* overflow: hidden; */
+    /* overflow: scroll; */
+    overflow: auto;
+    padding: 5px;
+}
+
+/* #scroll > p { */
+#scroll p {
+    background: transparent;
 }
