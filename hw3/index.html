@@ -18,9 +18,21 @@
             </header>
             
             <section class="todo-app__main">
-                <input class="todo-app__input" placeholder="What needs to be done?">
-                </input>
+                <input class="todo-app__input" placeholder="What needs to be done?"></input>
+                <ul class="todo-app__list" id="todo-list"></ul>
             </section>
+
+            <footer class="todo-app__footer" id="todo-footer">
+                <div class="todo-app__total"></div>
+                <ul class="todo-app__view-buttons">
+                    <button onclick="showAllTask()">All</button>
+                    <button onclick="showActiveTask()">Active</button>
+                    <button onclick="showCompletedTask()">Completed</button>
+                </ul>
+                <div class="todo-app__clean">
+                    <button onclick="clearCompleted()" id="clearCompletedButton">Clear completed</button>
+                </div>
+            </footer>
         </div>
         <script src="main.js"></script>
     </body>

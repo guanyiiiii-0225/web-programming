@@ -1,115 +1,151 @@
+let rootNode = document.getElementsByClassName("todo-app__root")[0];
+let inputNode = document.getElementsByClassName('todo-app__input')[0];
+let mainNode = document.getElementsByClassName('todo-app__main')[0];
+let footerNode = document.getElementById('todo-footer')
+let listNode = document.getElementById("todo-list");
+let clearCompletedNode = document.getElementById("clearCompletedButton");
 
+let tasksArr = [];
+let idCounter = 0;
+let state = "All";
 
-let inputNodes = document.getElementsByClassName('todo-app__input');
-let inputNode = inputNodes[0];
-
-let mainNodes = document.getElementsByClassName('todo-app__main');
-let mainNode = mainNodes[0];
-
-let rootNodes = document.getElementsByClassName("todo-app__root");
-let rootNode = rootNodes[0];
+updateCount();
 
 inputNode.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        console.log(inputNode.value);
-
-        let todoListNode = document.getElementById('todo-list');
-        if(todoListNode === null){
-            console.log("creating");
-
-            // creat todo list 
-            let new_todoListNode = document.createElement("ul");
-            new_todoListNode.className = "todo-app__list";
-            new_todoListNode.id = "todo-list";
-            mainNode.appendChild(new_todoListNode);
-            todoListNode = new_todoListNode;
-
-
-            // create footer
-            creatingFooter();
-        }
-        else{
-            console.log(todoListNode);
-        }
-
-        appendList();
-
-        // console.log(todoListNode.childElementCount);
-
+    if (event.keyCode === 13 && event.target.value !== '') {
+        // console.log(inputNode.value);
+        appendList(idCounter++, inputNode.value);
         inputNode.value = "";
     }
+    updateCount();
 });
 
-function appendList(){
-    let todoListNode = document.getElementById('todo-list');
+function appendList(idNum, inputText){
     let new_todoNode = document.createElement("li");
     new_todoNode.className = "todo-app__item";
-    new_todoNode.id = "item_" + todoListNode.childElementCount;
+    new_todoNode.id = "item_" + idNum;
+    new_todoNode.isComplete = false;
+    tasksArr[tasksArr.length] = new_todoNode;
         let new_div = document.createElement("div");
             new_div.className = "todo-app__checkbox";
             let new_input = document.createElement("input");
-                new_input.id = todoListNode.childElementCount;
+                new_input.id = idNum;
                 new_input.type = "checkbox";
                 new_input.onclick = function(caller){
                     itemNode = caller.target.parentNode.parentNode;
                     console.log(itemNode);
+                    detail = itemNode.childNodes[1];
                     if (caller.target.checked){
                         console.log(itemNode + "isComplete");
                         itemNode.isComplete = true;
+                        detail.style["textDecoration"] = "line-through";
+                        detail.style["opacity"] = 0.5
+                        if (state === "Active"){
+                            hideTask(itemNode);
+                        }
                     }
                     else {
                         console.log(itemNode + "notComplete");
                         itemNode.isComplete = false;
+                        detail.removeAttribute("style");
+                        if (state === "Completed"){
+                            hideTask(itemNode);
+                        }
                     }
+                    updateCount();
                 }
                 new_div.appendChild(new_input);
             let new_label = document.createElement("label");
-                new_label.htmlFor = todoListNode.childElementCount;
+                new_label.setAttribute("for", idNum);
                 new_div.appendChild(new_label);
         let new_h1 = document.createElement("h1");
             new_h1.className = "todo-app__item-detail";
-            new_h1.innerHTML = inputNode.value;
+            new_h1.innerHTML = inputText;
         let new_img = document.createElement("img");
             new_img.src = "./img/x.png";
             new_img.className = "todo-app__item-x";
+            new_img.onclick = function(caller){
+                liNode = caller.target.parentNode;
+                console.log(liNode);
+                deleteTask(liNode);
+            }
         new_todoNode.appendChild(new_div);
         new_todoNode.appendChild(new_h1);
         new_todoNode.appendChild(new_img);
-    todoListNode.appendChild(new_todoNode);
+
+        if(state != "Completed"){
+            showTask(new_todoNode);
+        }
+        
 }
 
-function creatingFooter(){
-    let newFooterNode = document.createElement("footer");
-    newFooterNode.className = "todo-app__footer";
-    newFooterNode.id = "todo-footer";
+function updateCount(){
+    // show footer or not
+    if(tasksArr.length > 0){
+        footerNode.style.display = "flex";
+    }
+    else{
+        footerNode.style.display = "none";
+    }
 
-    let new_div = document.createElement("div");
-    new_div.className = "todo-app__total";
-    new_div.innerHTML = "1 left";
+    // update count (xx left)
+    leftCnt = tasksArr.filter(ele => !ele.isComplete).length;
+    countNode = document.getElementsByClassName("todo-app__total")[0];
+    countNode.innerHTML = leftCnt + " left.";
+    showClearCompletedButtom();
+}
 
-    let new_ul = document.createElement("ul");
-    new_ul.className = "todo-app__view-buttons";
-    let b1 = document.createElement("button");
-    b1.innerHTML = "All";
-    let b2 = document.createElement("button");
-    b2.innerHTML = "Active";
-    let b3 = document.createElement("button");
-    b3.innerHTML = "Completed";
-    new_ul.appendChild(b1);
-    new_ul.appendChild(b2);
-    new_ul.appendChild(b3);
+function hideTask(todoNode){
+    listNode.removeChild(todoNode);
+    todoNode.isShow = false;
+}
 
 
-    let new_div2 = document.createElement("div");
-    new_div2.className = "todo-app__clean";
-    let b4 = document.createElement("button");
-    b4.innerHTML = "Clear completed";
-    new_div2.appendChild(b4);
+function deleteTask(liNode){
+    var arrIndex = tasksArr.findIndex(ele => ele.id == liNode.id);
+    tasksArr.splice(arrIndex, 1);
+    liNode.remove();
+    updateCount();
+}
 
-    newFooterNode.appendChild(new_div);
-    newFooterNode.appendChild(new_ul);
-    newFooterNode.appendChild(new_div2);
+function showTask(todoNode){
+    listNode.appendChild(todoNode);
+    todoNode.isShow = true;
+}
 
-    rootNode.appendChild(newFooterNode);
+function showAllTask(){
+    while (listNode.firstChild) {
+        listNode.removeChild(listNode.lastChild);
+    }
+    tasksArr.forEach(itemNode => showTask(itemNode));
+    state = "All";
+}
+
+function showActiveTask(){
+    while (listNode.firstChild) {
+        listNode.removeChild(listNode.lastChild);
+    }
+    tasksArr.filter(itemNode => !itemNode.isComplete).forEach(itemNode => showTask(itemNode));
+    state = "Active";
+}
+
+function showCompletedTask(){
+    while (listNode.firstChild) {
+        listNode.removeChild(listNode.lastChild);
+    }
+    tasksArr.filter(itemNode => itemNode.isComplete).forEach(itemNode => showTask(itemNode));
+    state = "Completed";
+}
+
+function clearCompleted(){
+    tasksArr.filter(itemNode => itemNode.isComplete).forEach(itemNode => deleteTask(itemNode));
+}
+
+function showClearCompletedButtom(){
+    if(tasksArr.filter(itemNode => itemNode.isComplete).length > 0){
+        clearCompletedNode.style.display = "flex";
+    }
+    else{
+        clearCompletedNode.style.display = "none";
+    }
 }
