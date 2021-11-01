@@ -1,7 +1,7 @@
-import Wrapper from "./components/wrapper";
-import Screen from "./components/screen";
-import ButtonBox from "./components/buttonBox";
-import Button from "./components/button";
+import Wrapper from "../components/wrapper";
+import Screen from "../components/screen";
+import ButtonBox from "../components/buttonBox";
+import Button from "../components/button";
 import React, { useState } from "react";
 
 const btnValues = [
@@ -19,16 +19,21 @@ const App = () => {
 
   const numClickHandler = (e) => {
     const value = e.target.innerHTML;
-    setnum(num === 0 && value === "0"? "0" : num%1 === 0 ? Number(num + value) : num + value);
-    setprocess(num === 0 && value === "0"? "0" : num%1 === 0 ? process+Number(value) : process + value);
-    setsignOn(false);
+    if(process.slice(-1) !== ")"){
+      setnum(num === 0 && value === "0"? "0" : num%1 === 0 ? Number(num + value) : num + value);
+      setprocess(num === 0 && value === "0"? "0" : num%1 === 0 ? process+Number(value) : process + value);
+      setsignOn(false);
+    }
   }
   
   const commaClickHandler = (e) => {
     const value = e.target.innerHTML;
-    setnum(!num.toString().includes(".") ? num + value : num);
-    setprocess(!num.toString().includes(".") && num != 0 ? process + "." : num == 0 ? process + "0." : process);
-    setsignOn(false);
+    if(process.slice(-1) !== ")"){
+      setnum(!num.toString().includes(".") ? num + value : num);
+      setprocess(!num.toString().includes(".") && num !== 0 ? process + "." : num === 0 ? process + "0." : process);
+      setsignOn(false);
+    }
+    
   }
 
   const signClickHandler = (e) => {
@@ -46,7 +51,7 @@ const App = () => {
 
     if(signOn === false){
       setnum(eval(process));
-      if(eval(process)%1 != 0){
+      if(eval(process)%1 !== 0){
         setnum(eval(process).toFixed(4));
       }
       setprocess(process + value);
@@ -64,6 +69,11 @@ const App = () => {
     setnum(0);
   }
 
+  const invertClickHandler = () => {
+    setprocess(process + "*(-1)");
+    setnum(0);
+  }
+
   return (
     <Wrapper>
       <Screen num = {num} process = {process}/>
@@ -76,7 +86,9 @@ const App = () => {
                 className={btn === "=" ? "equals" : `${btn === 0 ? "zero" : ""}`}
                 value={btn}
                 onClick={
-                  btn === "%"?
+                  btn === "+-"?
+                  invertClickHandler
+                  : btn === "%"?
                   percentClickHandler
                   : btn === "C"?
                   resetClickHandler
