@@ -1,0 +1,17 @@
+.wrapper {
+    width: 340px;
+    height: 540px;
+    padding: 15px;
+    padding-top: 0px;
+    padding-bottom: 60px;
+    border-radius: 10px;
+    background-color: #1C1C1C;
+  }
+
+.centered {
+    position: fixed;
+    top: 15%;
+    left: 45%;
+    margin-top: -50px;
+    margin-left: -100px;
+}
