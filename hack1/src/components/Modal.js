@@ -30,14 +30,14 @@ export default function Modal({restartGame, backToHome, win}){
     return (
         /* -- TODO 5-1 -- */
         /* Useful Hint: style = {{opacity: 1 or 0 }} */
-        <>
+        <div className = "modal">
             <div className = "modalWrapper"/>
             <div className = "modalContent">
                 <div className = "modalResult">{content}</div>
                 
                     {win?
                     
-<div className = "modalBtnWrapper">
+                        <div className = "modalBtnWrapper">
                         <div className = "modalBtn">New Game</div>
                         <div className = "modalBtn">Back to Home</div>
                         </div>
@@ -52,7 +52,7 @@ export default function Modal({restartGame, backToHome, win}){
             </div>
             <div className = "modalBtnWrapper"/>
 
-        </>
+        </div>
         
     );
 }
