@@ -39,7 +39,7 @@ const MineSweeper = () => {
             {/* -- TODO 1-1 -- */} 
             {/* Useful Hint: If ... <HomePage startGameOnClick = {startGameOnClick} .../> else <Board .../> */}
             {/* Reminder: You can refer to the structure file in p.6 of Hack1.pdf. */}
-            {!startGame? <HomePage startGameOnClick = {startGameOnClick}></HomePage>: <Board boardSize = {6} mineNum = {3}></Board>}
+            {!startGame? <HomePage startGameOnClick = {startGameOnClick}></HomePage>: <Board boardSize = {boardSize} mineNum = {mineNum}></Board>}
              
         </div>
     );
