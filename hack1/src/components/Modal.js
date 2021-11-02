@@ -34,18 +34,21 @@ export default function Modal({restartGame, backToHome, win}){
             <div className = "modalWrapper"/>
             <div className = "modalContent">
                 <div className = "modalResult">{content}</div>
+                <div className = "modalBtnWrapper"/>
                     {win?
-                    <div className = "modalBtnWrapper">
+                    
+<div className = "modalContent">
                         <div className = "modalBtn">New Game</div>
                         <div className = "modalBtn">Back to Home</div>
                         </div>
                         :
-                        <div className = "modalBtnWrapper">
+                        <div className = "modalContent">
                         <div className = "modalBtn">Try Again</div>
                         <div className = "modalBtn">Back to Home</div>
                         </div>
 
                     }
+                <div className = "modalBtnWrapper"/>
             </div>
 
         </>
