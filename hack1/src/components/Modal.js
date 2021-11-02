@@ -17,9 +17,38 @@ export default function Modal({restartGame, backToHome, win}){
         }, 1000);
     }, []);
 
+    let content = "";
+    const contentHelper = ()=>{
+        if(win){
+            content = "WIN";
+        }
+        else{
+            content = "Game Over";
+        }
+    }
+
     return (
-        {/* -- TODO 5-1 -- */}
+        /* -- TODO 5-1 -- */
         /* Useful Hint: style = {{opacity: 1 or 0 }} */
+        <>
+            <div className = "modalWrapper"/>
+            <div className = "modalContent">
+                <div className = "modalResult">{content}</div>
+                    {win?
+                    <div className = "modalBtnWrapper">
+                        <div className = "modalBtn">New Game</div>
+                        <div className = "modalBtn">Back to Home</div>
+                        </div>
+                        :
+                        <div className = "modalBtnWrapper">
+                        <div className = "modalBtn">Try Again</div>
+                        <div className = "modalBtn">Back to Home</div>
+                        </div>
+
+                    }
+            </div>
+
+        </>
         
     );
 }

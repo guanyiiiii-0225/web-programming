@@ -33,10 +33,9 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         {/* -- TODO 3-1 -- */}
         {/* Useful Hint: createBoard(...) */}
         let b = createBoard(boardSize, mineNum);
-        let board = b.board;
-        let mineLocations = b.mineLocations;
-        setBoard(board);
+        setBoard(b.board);
         setRemainFlagNum(mineNum);
+        setMineLocations(b.mineLocations)
         
     }
 
@@ -75,11 +74,19 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         {/* Useful Hint: The function in reveal.js may be useful. You should consider if the cell you want to reveal is a location of mines or not. */}
         {/* Reminder: Also remember to handle the condition that after you reveal this cell then you win the game. */}
         
-        let newBoard = Array.from(board);
-        if(!newBoard[x][y].flagged && !newBoard[x][y].revealed){
-            newBoard[x][y].revealed = true;
+        if(win === false && gameOver === false){
+            let newBoard = Array.from(board);
+            if(!newBoard[x][y].flagged && !newBoard[x][y].revealed){
+                newBoard[x][y].revealed = true;
+            }
+            if(newBoard[x][y].value !== '💣'){
+                setNonMineCount(nonMineCount+1);
+            }
+            else{
+                setGameOver(true);
+            }
+            setBoard(newBoard);
         }
-        setBoard(newBoard);
     };
 
     return(
@@ -90,6 +97,18 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
             {/* -- TODO 3-1 -- */}
             {/* Useful Hint: The board is composed of BOARDSIZE*BOARDSIZE of Cell (2-dimention). So, nested 'map' is needed to implement the board.  */}
             {/* Reminder: Remember to use the component <Cell> and <Dashboard>. See Cell.js and Dashboard.js for detailed information. */}
+            {gameOver || win? 
+            <div className = "boardContainer">
+            {board.map(row => (
+                <div id ={`"row"${row[1].x}`} style = {{display: 'flex', opacity: 0.5}}>
+                    {row.map(cell => (
+                        <Cell rowIdx = {cell.x} colIdx = {cell.y} detail = {cell} updateFlag = {updateFlag} revealCell = {revealCell} ></Cell>
+                    ))}
+                </div>
+            ))}
+            <Modal win = {win}/>
+            </div>
+            :
             <div className = "boardContainer">
                 {board.map(row => (
                     <div id ={`"row"${row[1].x}`} style = {{display: 'flex'}}>
@@ -98,7 +117,7 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
                         ))}
                     </div>
                 ))}
-            </div>
+            </div>}
 
 
             </div>
