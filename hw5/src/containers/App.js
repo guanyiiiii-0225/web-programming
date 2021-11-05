@@ -21,7 +21,7 @@ const App = () => {
     const value = e.target.innerHTML;
     if(process.slice(-1) !== ")"){
       setnum(num === 0 && value === "0"? "0" : num%1 === 0 ? Number(num + value) : num + value);
-      setprocess(num === 0 && value === "0"? "0" : num%1 === 0 ? process+Number(value) : process + value);
+      setprocess(num === 0 && value === "0" && process === 0 ? "0" : num%1 === 0 ? process+Number(value) : process + value);
       setsignOn(false);
     }
   }
