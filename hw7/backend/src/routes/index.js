@@ -13,10 +13,7 @@ router.delete('/clear-db', (req, res) => {
     deleteScoreCard(req,res);
 })
 
-
-
 router.get('/query-cards', (req, res) => {
-  console.log(req.query);
   queryScoreCard(req,res);
 })
 
