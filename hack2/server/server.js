@@ -35,10 +35,12 @@ app.listen(port, () => {
 // .connect(process.env.MONGO_URL, {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
-// })
-// .then((res) => console.log("mongo db connection created"));
-
-
-// if (process.env.MODE === 'EXAM')
+// }, () => {
+//   if (process.env.MODE === 'EXAM'){
 //     dataInit();
+//     db.close();
+//   }
+//   console.log("mongo db connection created");
+// })
+
 
