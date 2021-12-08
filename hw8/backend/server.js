@@ -43,6 +43,7 @@ db.once('open', () => {
     console.log("db inside");
     wss.on('connection', (ws) => {
         initData(ws);
+
         ws.onmessage = async (byteString) => {
           const { data } = byteString
           const [task, payload] = JSON.parse(data)
@@ -61,7 +62,7 @@ db.once('open', () => {
             //     type: 'success',
             //     msg: 'Message sent.'
             //   }, ws);
-              broadcastMessage(['output', [payload]], { type: 'success', msg: 'Message sent.'});
+              broadcastMessage(['output', [payload]], { type: 'success', msg: 'New message!'});
             break
             }
             case 'clear': {
@@ -72,7 +73,7 @@ db.once('open', () => {
                 });
                 
                 break
-            }          
+            }     
             default: break
           }
         }
