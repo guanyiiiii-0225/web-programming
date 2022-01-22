@@ -23,7 +23,7 @@ const port = process.env.PORT || 5000
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
-mongoose.connect('mongodb+srv://user:password0225@cluster0.j5vmi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
