@@ -11,6 +11,11 @@
 3. 下方照片展示區域，當滑鼠移動到某一照片時，此照片會放大，外框也會變成粉紅色
 4. 可以嘗試縮放網頁大小，照片排版會隨著網頁大小有所調整（進階挑戰！）
 
+## 成果展示
+<img width="948" alt="image" src="https://user-images.githubusercontent.com/58909342/151100466-6e0ec6e1-8410-4dfd-b5ac-b79a5b3ccb39.png">
+<img width="948" alt="image" src="https://user-images.githubusercontent.com/58909342/151100577-4e51850b-28f6-4083-abf8-683ce5e934bb.png">
+
+
 ## 相關連結
 所有照片皆取自於 IG 網紅 [@mr.pokee](https://www.instagram.com/mr.pokee/)<br>
 如果對刺蝟有興趣同學們可以自行前往～
