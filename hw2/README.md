@@ -1,6 +1,7 @@
 # wp1101-hw02
 ## 作業要求
 這個作業要使⽤ JavaScript 把作業⼀的靜態數位相簿網⾴做出⼀些動態的效果
++ Homework Description: [Link](https://ceiba.ntu.edu.tw/course/fdb723/hw/hw2.pdf)
 
 ## 成果展示 + 網站服用指南：
 
