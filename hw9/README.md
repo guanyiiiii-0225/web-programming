@@ -1,3 +1,4 @@
-# wp1101
-
-作業有參考上學期修課的同學，介面跟老師設計的樣子不太一樣～前端沒有做一個一個小視窗的 UI，但是一對一的聊天是可以做到的，只要發送訊息的人（Username）以及收訊息的人（target）有對應到，就可以看到別人傳送的訊息！然後清除會將所有資料庫內的訊息都清掉喔～
+# wp1101-hw09
+## 作業要求
+這個作業要使⽤ React/AntDesign/WebSocket/GraphQL 框架，寫出⼀個簡單的的全端應⽤ “ChatRoom App”
++ Homework Description: [Link](https://ceiba.ntu.edu.tw/course/fdb723/hw/hw9.pdf)
